@@ -1,13 +1,17 @@
-CC = clang
+CC = gcc
 CFLAGS = -Wall -std=c17 -O2 -fPIC
 prefix = /usr/local
 
 
-lib: libbesic.so libbesic.a
+lib: libbesic.a
 
 .PHONY: test
 test: test.out
 	./test.out
+
+install: lib
+	cp libbesic.a $(DESTDIR)$(prefix)/lib
+	cp besic.h $(DESTDIR)$(prefix)/include
 
 
 test.out: test.c besic.o
@@ -17,15 +21,10 @@ libbesic.so: besic.o
 	$(CC) $(CFLAGS) -shared $^ -o $@
 
 libbesic.a: besic.o
-	$(AR) rs $@ $^
+	$(AR) rcs $@ $^
 
 besic.o: besic.c besic.h
 
-
-install: lib
-	install libbesic.so $(DESTDIR)$(prefix)/lib
-	install libbesic.a $(DESTDIR)$(prefix)/lib
-	install besic.h $(DESTDIR)$(prefix)/include
 
 clean:
 	rm -f *.o *.out *.so *.a
