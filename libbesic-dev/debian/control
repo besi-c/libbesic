@@ -1,0 +1,12 @@
+Source: libbesic-dev
+Maintainer: Penn Bauman <pcb8gb@virginia.edu>
+Section: misc
+Priority: optional
+Standards-Version: 4.5.0
+Build-Depends: gcc (>= 10), debhelper (>= 9)
+
+Package: libbesic-dev
+Architecture: armhf
+Depends: ${misc:Depends}
+Description: BESI-C shared library
+ Shared library used to coordinate BESI-C settings retrieval

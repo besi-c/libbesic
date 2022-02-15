@@ -10,6 +10,8 @@ test: test.out
 	./test.out
 
 install: lib
+	mkdir -p $(DESTDIR)$(prefix)/lib
+	mkdir -p $(DESTDIR)$(prefix)/include
 	cp libbesic.a $(DESTDIR)$(prefix)/lib
 	cp besic.h $(DESTDIR)$(prefix)/include
 

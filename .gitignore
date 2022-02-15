@@ -3,3 +3,14 @@
 *.so
 *.a
 *.swp
+*.tar.xz
+*.deb
+*.dsc
+*.build
+*.buildinfo
+*.changes
+*.substvars
+*.debhelper
+debhelper-build-stamp
+files
+/libbesic-dev/debian/libbesic-dev
