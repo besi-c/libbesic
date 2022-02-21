@@ -1,12 +1,12 @@
-CC = gcc
-CFLAGS = -Wall -std=c17 -O2 -fPIC
+CFLAGS = -Wall -std=c17 -O2 -fPIE -g
 prefix = /usr/local
 
 
 getval.out: getval.c
-	$(CC) $(CFLAGS) $^ -static -lbesic -o $@
+	$(CC) $(CFLAGS) $^ -pie -lbesic -o $@
 
 install: getval.out
+	mkdir -p $(DESTDIR)$(prefix)/bin
 	install -T getval.out $(DESTDIR)$(prefix)/bin/besic-getval
 
 clean:
