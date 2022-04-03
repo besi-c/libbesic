@@ -1,0 +1,28 @@
+Source: libbesic
+Maintainer: Penn Bauman <pcb8gb@virginia.edu>
+Section: misc
+Priority: optional
+Standards-Version: 4.5.0
+Build-Depends: gcc (>= 10), debhelper (>= 9)
+
+Package: libbesic0
+Architecture: any
+Section: libs
+Provides: libbesic
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: BESI-C shared library
+ Shared library used to coordinate BESI-C settings retrieval
+
+Package: libbesic0-dev
+Architecture: any
+Depends: libbesic0 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Conflicts: libbesic-dev
+Provides: libbesic-dev
+Description: BESI-C shared library development files
+ Development files for BESI-C shared library
+
+Package: libbesic-tools
+Architecture: armhf
+Depends: libbesic0 (>= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Description: BESI-C value getter
+ Getter for BESI-C configuration values

@@ -1,0 +1,11 @@
+libbesic (0.2.0) UNRELEASED; urgency=medium
+
+  * Converted to standard debian library format.
+
+ -- Penn Bauman <pcb8gb@virginia.edu>  Tue, 15 Feb 2022 16:06:27 -0500
+
+libbesic (0.1.0) UNRELEASED; urgency=medium
+
+  * Initial release.
+
+ -- Penn Bauman <pcb8gb@virginia.edu>  Tue, 15 Feb 2022 16:06:27 -0500

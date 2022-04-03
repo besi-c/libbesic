@@ -2,9 +2,9 @@
 
 #define ALPHABET "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-#define CONFIG_PATH "/var/besic/besic.conf"
+#define CONFIG_PATH "/etc/besic/besic.conf"
 #define DEVICE_PATH "/var/besic/device.conf"
-#define TYPE_PATH "/var/besic/type.conf"
+#define TYPE_PATH "/etc/besic/type.conf"
 
 #define DEFAULT_API_URL "https://api.besic.org"
 #define DEFAULT_DATA_PATH "/var/besic/data"

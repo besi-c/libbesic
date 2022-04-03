@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <besic.h>
+#include "besic.h"
 
 char compare(const char *a, const char *b) {
 	for (int i = 0; ; i++) {
