@@ -3,8 +3,7 @@
 #include "besic.h"
 
 int main() {
-	printf("mac %s\n", getDeviceMAC());
-	printf("password     = %s\n", getDevicePassword());
+	printf("MAC          = %s\n", getDeviceMAC());
 	printf("Type         = %s\n", getDeviceType());
 	printf("API URL      = %s\n", getApiUrl());
 	printf("Data Path    = %s\n", getDataPath());

@@ -1,3 +1,9 @@
+libbesic (0.3.0) UNRELEASED; urgency=medium
+
+  * Removed password and other breaking changes.
+
+ -- Penn Bauman <pcb8gb@virginia.edu>  Mon, 11 Apr 2022 20:19:34 -0500
+
 libbesic (0.2.0) UNRELEASED; urgency=medium
 
   * Converted to standard debian library format.

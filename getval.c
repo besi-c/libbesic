@@ -22,8 +22,6 @@ int main(int argc, char **argv) {
 	}
 	if (compare(argv[1], "mac")) {
 		printf("%s\n", getDeviceMAC());
-	} else if (compare(argv[1], "password")) {
-		printf("%s\n", getDevicePassword());
 	} else if (compare(argv[1], "type")) {
 		printf("%s\n", getDeviceType());
 	} else if (compare(argv[1], "api-url")) {

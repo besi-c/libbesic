@@ -6,13 +6,11 @@
 #include <string.h>
 #include <time.h>
 
-const char* getDeviceMAC();
-const char* getDevicePassword();
-const char* getDeviceType();
+char* getDeviceMAC();
+char* getDeviceType();
 
-const char* getApiUrl();
-
-const char* getDataPath();
-const char* getArchivePath();
+char* getApiUrl();
+char* getDataPath();
+char* getArchivePath();
 
 #endif

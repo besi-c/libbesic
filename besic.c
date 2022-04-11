@@ -1,9 +1,6 @@
 #include "besic.h"
 
-#define ALPHABET "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
 #define CONFIG_PATH "/etc/besic/besic.conf"
-#define DEVICE_PATH "/var/besic/device.conf"
 #define TYPE_PATH "/etc/besic/type.conf"
 
 #define DEFAULT_API_URL "https://api.besic.org"
@@ -12,97 +9,58 @@
 
 
 // Private functions
-void createDeviceFile();
-const char* getFileVar(const char* filepath, const char *name, const char *fallback);
+char* getFileVar(const char* filepath, const char *name, const char *fallback);
 
 
 //////// Libarary functions
 
 // Get device MAC, generate if not available
-const char* getDeviceMAC() {
-	const char *name = "MAC";
-	const char *fin = getFileVar(DEVICE_PATH, name, 0);
-	if (fin == 0) {
-		createDeviceFile();
-		fin = getFileVar(DEVICE_PATH, name, 0);
+char* getDeviceMAC() {
+	// Get MAC
+	char raw[18];
+	FILE *fp = fopen("/sys/class/net/wlan0/address", "r");
+	if (!fp) {
+		perror("Loading MAC");
+		exit(-1);
 	}
-	return fin;
-}
-// Get device password, generate if not available
-const char* getDevicePassword() {
-	const char *name = "PASSWORD";
-	const char *fin = getFileVar(DEVICE_PATH, name, 0);
-	if (fin == 0) {
-		createDeviceFile();
-		fin = getFileVar(DEVICE_PATH, name, 0);
+	fgets(raw, 18, fp);
+	fclose(fp);
+	// Format MAC
+	char *mac = malloc(13);
+	for (int i = 0; i < 6; i++) {
+		memcpy(&mac[i*2], &raw[i*3], 2);
 	}
-	return fin;
+	mac[12] = 0;
+	return mac;
 }
 // Get device type, 'NONE' if unset
-const char* getDeviceType() {
+char* getDeviceType() {
 	return getFileVar(TYPE_PATH, "TYPE", "NONE");
 }
 
 // Get API URL
-const char* getApiUrl() {
+char* getApiUrl() {
 	return getFileVar(CONFIG_PATH, "API_URL", DEFAULT_API_URL);
 }
-
 // Get path to data directory
-const char* getDataPath() {
+char* getDataPath() {
 	return getFileVar(CONFIG_PATH, "DATA_PATH", DEFAULT_DATA_PATH);
 }
 // Get path to archive directory
-const char* getArchivePath() {
+char* getArchivePath() {
 	return getFileVar(CONFIG_PATH, "ARCHIVE_PATH", DEFAULT_ARCHIVE_PATH);
 }
 
 
 //////// Private Functions
 
-// Create device file with MAC and random password
-void createDeviceFile() {
-	// Get MAC
-	char mac[18];
-	FILE *fp = fopen("/sys/class/net/wlan0/address","r");
-	if (!fp) {
-		perror("Loading MAC");
-		exit(-1);
-	}
-	fgets(mac, 18, fp);
-	fclose(fp);
-	//printf("mac = '%s'\n", mac);
-
-	// Open device file
-	fp = fopen(DEVICE_PATH, "w");
-	if (fp == 0) {
-		perror("Creating Device File");
-		exit(-1);
-	}
-	// Write Warning
-	fprintf(fp, "# Generated file DO NOT EDIT\n");
-	// Write MAC
-	fprintf(fp, "MAC=\"");
-	for (int i = 0; i < 17; i += 3) {
-		fwrite(&mac[i], 2, 1, fp);
-	}
-	fprintf(fp, "\"\nPASSWORD=\"");
-	// Write random password
-	srand((unsigned) time(NULL));
-	for (int i = 0; i < 32; i++) {
-		fputc(ALPHABET[rand() % strlen(ALPHABET)], fp);
-	}
-	fprintf(fp, "\"\n");
-	fclose(fp);
-}
-
 // Read variable from ENV format file
-const char* getFileVar(const char* filepath, const char *name, const char *fallback) {
+char* getFileVar(const char* filepath, const char *name, const char *fallback) {
 	//enum progress state = VAR_NAME;
 	FILE *fp;
 	fp = fopen(filepath, "r");
 	if (fp == 0)
-		return fallback;
+		return (char*)fallback;
 
 	char c = 0;
 	int i = -1;
@@ -162,5 +120,5 @@ const char* getFileVar(const char* filepath, const char *name, const char *fallb
 	}
 	// Return fallback value if end of file reached
 	fclose(fp);
-	return fallback;
+	return (char*)fallback;
 }
