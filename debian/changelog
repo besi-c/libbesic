@@ -1,3 +1,9 @@
+libbesic (0.4.0) UNRELEASED; urgency=medium
+
+  * Added API calls with libcurl.
+
+ -- Penn Bauman <pcb8gb@virginia.edu>  Tue, 12 Apr 2022 00:31:47 -0500
+
 libbesic (0.3.0) UNRELEASED; urgency=medium
 
   * Removed password and other breaking changes.

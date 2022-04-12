@@ -9,13 +9,13 @@ Package: libbesic1
 Architecture: any
 Section: libs
 Provides: libbesic
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: libcurl4, ${shlibs:Depends}, ${misc:Depends}
 Description: BESI-C shared library
  Shared library used to coordinate BESI-C settings retrieval
 
 Package: libbesic1-dev
 Architecture: any
-Depends: libbesic1 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: libbesic1 (= ${binary:Version}), libcurl4-openssl-dev, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: libbesic-dev
 Provides: libbesic-dev
 Description: BESI-C shared library development files

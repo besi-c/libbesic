@@ -34,7 +34,7 @@ test.out: test.c libbesic.so
 	$(CC) $(CFLAGS) -pie $^ -o $@
 
 libbesic.so: besic.o
-	$(CC) $(CFLAGS) -shared -Wl,-soname,$@.$(SOVERSION) $^ -o $@
+	$(CC) $(CFLAGS) -shared -Wl,-soname,$@.$(SOVERSION) $^ -lcurl -o $@
 	ln -fs $@ $@.$(SOVERSION)
 
 libbesic.a: besic.o
