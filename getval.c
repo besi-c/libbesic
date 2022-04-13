@@ -17,21 +17,23 @@ char compare(const char *a, const char *b) {
 
 int main(int argc, char **argv) {
 	if (argc == 1) {
-		printf("Missing arguement\n");
+		printf("Missing argument\n");
 		return 1;
 	}
 	if (compare(argv[1], "mac")) {
-		printf("%s\n", getDeviceMAC());
+		printf("%s\n", besic_device_mac());
 	} else if (compare(argv[1], "type")) {
-		printf("%s\n", getDeviceType());
+		printf("%s\n", besic_device_type());
+	} else if (compare(argv[1], "id")) {
+		printf("%02x\n", besic_device_id());
 	} else if (compare(argv[1], "api-url")) {
-		printf("%s\n", getApiUrl());
-	} else if (compare(argv[1], "data-path")) {
-		printf("%s\n", getDataPath());
-	} else if (compare(argv[1], "archive-path")) {
-		printf("%s\n", getArchivePath());
+		printf("%s\n", besic_api_url());
+	} else if (compare(argv[1], "data-dir")) {
+		printf("%s\n", besic_data_dir());
+	} else if (compare(argv[1], "archive-dir")) {
+		printf("%s\n", besic_archive_dir());
 	} else {
-		printf("Unknown arguement '%s'\n", argv[1]);
+		printf("Unknown argument '%s'\n", argv[1]);
 		return 1;
 	}
 	return 0;

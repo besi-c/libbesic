@@ -1,33 +1,40 @@
 #include <stdio.h>
 #include <string.h>
+#include <sys/time.h>
 
 #include "besic.h"
 
 int main(int argc, char **argv) {
-	printf("MAC          = %s\n", getDeviceMAC());
-	printf("Type         = %s\n", getDeviceType());
-	printf("Beacon ID    = %02x\n", getDeviceID());
-	printf("API URL      = %s\n", getApiUrl());
-	printf("Data Path    = %s\n", getDataPath());
-	printf("Archive Path = %s\n", getArchivePath());
+	printf("MAC          = %s\n", besic_device_mac());
+	printf("Type         = %s\n", besic_device_type());
+	printf("Beacon ID    = %02x\n", besic_device_id());
+	printf("API URL      = %s\n", besic_api_url());
+	printf("Data Path    = %s\n", besic_data_dir());
+	printf("Archive Path = %s\n", besic_archive_dir());
 
 	if (argc == 1)
 		return 0;
 
 	if (!strcmp(argv[1], "api")) {
-		printf("Heartbeat: %d\n", apiHeartbeat());
-
-		BESIC_Data data;
-		data.timestamp = 1;
-		data.lux = 0.1;
-		data.tmp = 1.0;
+		besic_data data;
+		struct timeval time;
+		gettimeofday(&time, NULL);
+		data.timestamp = time.tv_sec*1000LL + time.tv_usec/1000LL;
+		data.lux = 0.0;
+		data.tmp = -273.15;
 		data.prs = 0.0;
-		data.hum = 0.0;
-		printf("Data Heartbeat: %d\n", apiDataHeartbeat(&data));
+		data.hum = 100.0;
 
+		int res = besic_data_heartbeat(&data);
+		if (res == -1) {
+			printf("Heartbeat: %d\n", besic_heartbeat());
+		} else {
+			printf("Data Heartbeat: %d\n", res);
+		}
 		return 0;
 	}
 
-	printf("Unknown arguement: '%s'\n", argv[1]);
+	printf("Unknown argument: '%s'\n", argv[1]);
 	return 0;
 }
+

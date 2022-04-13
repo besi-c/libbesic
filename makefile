@@ -1,13 +1,13 @@
 CC = gcc
 CFLAGS = -g -Wall -std=c17 -O3 -fPIC -fPIE
-SOVERSION = 0
+SOVERSION = 2
 
 prefix = /usr/local
 bindir = $(prefix)/bin
 includedir = $(prefix)/include
 libdir = $(prefix)/lib
 
-all: lib getval.out
+all: lib getval.out heartbeat.out
 
 lib: libbesic.so libbesic.a
 
@@ -25,9 +25,18 @@ install: all
 	cd $(DESTDIR)$(libdir) && ln -fs libbesic.so.$(SOVERSION) libbesic.so
 	install -m 0755 -d $(DESTDIR)$(bindir)
 	install -m 0755 getval.out $(DESTDIR)$(bindir)/besic-getval
-	# man
+	install -m 0755 heartbeat.out $(DESTDIR)$(bindir)/besic-heartbeat
+
+remove:
+	rm -f $(DESTDIR)$(includedir)/besic.h
+	rm -f $(DESTDIR)$(libdir)/libbesic.*
+	rm -f $(DESTDIR)$(bindir)/besic-getval
+	rm -f $(DESTDIR)$(bindir)/besic-heartbeat
 
 getval.out: getval.c libbesic.so
+	$(CC) $(CFLAGS) -pie $^ -o $@
+
+heartbeat.out: heartbeat.c libbesic.so
 	$(CC) $(CFLAGS) -pie $^ -o $@
 
 test.out: test.c libbesic.so

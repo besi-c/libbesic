@@ -3,43 +3,43 @@
 
 #define BESIC_CONFIG_FILE "/etc/besic/besic.conf"
 #define BESIC_DEFAULT_API_URL "https://api.besic.org"
-#define BESIC_DEFAULT_DATA_PATH "/var/besic/data"
-#define BESIC_DEFAULT_ARCHIVE_PATH "/var/besic/archive"
+#define BESIC_DEFAULT_DATA_DIR "/var/besic/data"
+#define BESIC_DEFAULT_ARCHIVE_DIR "/var/besic/archive"
 
 
 // One environmental data sensors reading
 typedef struct {
-	long timestamp; // unix time in milliseconds
+	long long timestamp; // unix time in milliseconds
 	float lux;
 	float tmp;
 	float prs;
 	float hum;
-} BESIC_Data;
+} besic_data;
 
 
 // Make heartbeat API call
-int apiHeartbeat();
+int besic_heartbeat();
 // Make data heartbeat API call
-int apiDataHeartbeat(BESIC_Data *data);
+int besic_data_heartbeat(besic_data *data);
 // Make custom heartbeat API call, use null (0) for device defaults
-int apiTestHeartbeat(char *mac, char *type);
+int besic_custom_heartbeat(char *mac, char *path, besic_data *data);
 
 
 // Get device MAC address formatted without colons
-char* getDeviceMAC();
+char* besic_device_mac();
 // Get device type from /etc/besic/type.conf, or NONE if not found
-char* getDeviceType();
+char* besic_device_type();
 // Get device ID from API each reboot, or from a cache file otherwise
 //   returns the ID on success, -1 on failure
-int getDeviceID();
+int besic_device_id();
 
 
 // Get API URL from config file, or default if not set
-char* getApiUrl();
+char* besic_api_url();
 // Get data directory path from config file, or default if not set
-char* getDataPath();
+char* besic_data_dir();
 // Get archive directory path from config file, or default if not set
-char* getArchivePath();
+char* besic_archive_dir();
 
 
 #endif

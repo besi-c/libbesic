@@ -5,7 +5,7 @@ Priority: optional
 Standards-Version: 4.5.0
 Build-Depends: gcc (>= 10), debhelper (>= 9)
 
-Package: libbesic1
+Package: libbesic2
 Architecture: any
 Section: libs
 Provides: libbesic
@@ -13,16 +13,17 @@ Depends: libcurl4, ${shlibs:Depends}, ${misc:Depends}
 Description: BESI-C shared library
  Shared library used to coordinate BESI-C settings retrieval
 
-Package: libbesic1-dev
+Package: libbesic2-dev
 Architecture: any
-Depends: libbesic1 (= ${binary:Version}), libcurl4-openssl-dev, ${shlibs:Depends}, ${misc:Depends}
+Depends: libbesic2 (= ${binary:Version}), libcurl4-openssl-dev, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: libbesic-dev
 Provides: libbesic-dev
 Description: BESI-C shared library development files
  Development files for BESI-C shared library
 
 Package: libbesic-tools
-Architecture: armhf
-Depends: libbesic1 (>= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Description: BESI-C value getter
+Architecture: any
+Depends: libbesic2 (>= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Description: BESI-C library binary tools
  Getter for BESI-C configuration values
+ BESI-C heartbeat API call command

@@ -1,10 +1,16 @@
-libbesic (0.4.0) UNRELEASED; urgency=medium
+libbesic (2.0.0) UNRELEASED; urgency=medium
+
+  * Breaking changes to make timestamp 64bit and renamed functions.
+
+ -- Penn Bauman <pcb8gb@virginia.edu>  Wed, 13 Apr 2022 21:26:07 -0500
+
+libbesic (1.1.0) UNRELEASED; urgency=medium
 
   * Added API calls with libcurl.
 
  -- Penn Bauman <pcb8gb@virginia.edu>  Tue, 12 Apr 2022 00:31:47 -0500
 
-libbesic (0.3.0) UNRELEASED; urgency=medium
+libbesic (1.0.0) UNRELEASED; urgency=medium
 
   * Removed password and other breaking changes.
 
