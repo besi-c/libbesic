@@ -1,3 +1,9 @@
+libbesic (2.1.0) UNRELEASED; urgency=medium
+
+  * Added log directory, S3 bucket, and secret retrieval functions.
+
+ -- Penn Bauman <pcb8gb@virginia.edu>  Fri, 15 Apr 2022 22:03:38 -0500
+
 libbesic (2.0.0) UNRELEASED; urgency=medium
 
   * Breaking changes to make timestamp 64bit and renamed functions.

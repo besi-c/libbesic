@@ -10,6 +10,7 @@
 
 
 #define BESIC_TYPE_FILE "/etc/besic/type.conf"
+#define BESIC_SECRETS_FILE "/etc/besic/secrets.conf"
 #define TMP_BEACON_FILE "/tmp/besic/beacon"
 #define CACHED_BEACON_FILE "/var/cache/besic/beacon"
 
@@ -121,10 +122,21 @@ int besic_device_id() {
 }
 
 
+// Get secret string
+char* besic_secret(const char *name) {
+	return get_file_var(BESIC_SECRETS_FILE, name, 0);
+}
+
+
 // Get API URL
 char* besic_api_url() {
 	return get_file_var(BESIC_CONFIG_FILE, "API_URL", BESIC_DEFAULT_API_URL);
 }
+// Get S3 bucket
+char* besic_s3_bucket() {
+	return get_file_var(BESIC_CONFIG_FILE, "S3_BUCKET", BESIC_DEFAULT_S3_BUCKET);
+}
+
 // Get path to data directory
 char* besic_data_dir() {
 	return get_file_var(BESIC_CONFIG_FILE, "DATA_DIR", BESIC_DEFAULT_DATA_DIR);
@@ -132,6 +144,10 @@ char* besic_data_dir() {
 // Get path to archive directory
 char* besic_archive_dir() {
 	return get_file_var(BESIC_CONFIG_FILE, "ARCHIVE_DIR", BESIC_DEFAULT_ARCHIVE_DIR);
+}
+// Get path to log directory
+char* besic_log_dir() {
+	return get_file_var(BESIC_CONFIG_FILE, "LOG_DIR", BESIC_DEFAULT_LOG_DIR);
 }
 
 

@@ -7,7 +7,7 @@ bindir = $(prefix)/bin
 includedir = $(prefix)/include
 libdir = $(prefix)/lib
 
-all: lib getval.out heartbeat.out
+all: lib getval.out heartbeat.out secret.out
 
 lib: libbesic.so libbesic.a
 
@@ -26,12 +26,15 @@ install: all
 	install -m 0755 -d $(DESTDIR)$(bindir)
 	install -m 0755 getval.out $(DESTDIR)$(bindir)/besic-getval
 	install -m 0755 heartbeat.out $(DESTDIR)$(bindir)/besic-heartbeat
+	install -m 0755 secret.out $(DESTDIR)$(bindir)/besic-secret
 
 remove:
 	rm -f $(DESTDIR)$(includedir)/besic.h
 	rm -f $(DESTDIR)$(libdir)/libbesic.*
 	rm -f $(DESTDIR)$(bindir)/besic-getval
 	rm -f $(DESTDIR)$(bindir)/besic-heartbeat
+	rm -f $(DESTDIR)$(bindir)/besic-secret
+
 
 getval.out: getval.c libbesic.so
 	$(CC) $(CFLAGS) -pie $^ -o $@
@@ -39,8 +42,12 @@ getval.out: getval.c libbesic.so
 heartbeat.out: heartbeat.c libbesic.so
 	$(CC) $(CFLAGS) -pie $^ -o $@
 
+secret.out: secret.c libbesic.so
+	$(CC) $(CFLAGS) -pie $^ -o $@
+
 test.out: test.c libbesic.so
 	$(CC) $(CFLAGS) -pie $^ -o $@
+
 
 libbesic.so: besic.o
 	$(CC) $(CFLAGS) -shared -Wl,-soname,$@.$(SOVERSION) $^ -lcurl -o $@

@@ -28,10 +28,14 @@ int main(int argc, char **argv) {
 		printf("%02x\n", besic_device_id());
 	} else if (compare(argv[1], "api-url")) {
 		printf("%s\n", besic_api_url());
+	} else if (compare(argv[1], "s3-bucket")) {
+		printf("%s\n", besic_s3_bucket());
 	} else if (compare(argv[1], "data-dir")) {
 		printf("%s\n", besic_data_dir());
 	} else if (compare(argv[1], "archive-dir")) {
 		printf("%s\n", besic_archive_dir());
+	} else if (compare(argv[1], "log-dir")) {
+		printf("%s\n", besic_log_dir());
 	} else {
 		printf("Unknown argument '%s'\n", argv[1]);
 		return 1;
