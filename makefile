@@ -1,15 +1,16 @@
 CC = gcc
-CFLAGS = -g -Wall -std=c17 -O3 -fPIC -fPIE
+CFLAGS = -g -Wall -std=c17 -O3 -fPIC
 SOVERSION = 2
 
 prefix = /usr/local
 bindir = $(prefix)/bin
 includedir = $(prefix)/include
 libdir = $(prefix)/lib
+etcdir = /etc/besic
 
-all: lib getval.out heartbeat.out secret.out
+all: lib getval.out heartbeat.out secret.out confgen.out
 
-lib: libbesic.so libbesic.a
+lib: libbesic.so
 
 
 .PHONY: test
@@ -27,6 +28,8 @@ install: all
 	install -m 0755 getval.out $(DESTDIR)$(bindir)/besic-getval
 	install -m 0755 heartbeat.out $(DESTDIR)$(bindir)/besic-heartbeat
 	install -m 0755 secret.out $(DESTDIR)$(bindir)/besic-secret
+	install -m 0755 -d $(DESTDIR)$(etcdir)
+	LD_LIBRARY_PATH="$$LD_LIBRARY_PATH:." ./confgen.out > $(DESTDIR)$(etcdir)/besic.conf
 
 remove:
 	rm -f $(DESTDIR)$(includedir)/besic.h
@@ -45,12 +48,15 @@ heartbeat.out: heartbeat.c libbesic.so
 secret.out: secret.c libbesic.so
 	$(CC) $(CFLAGS) -pie $^ -o $@
 
+confgen.out: confgen.c libbesic.so
+	$(CC) $(CFLAGS) -pie $^ -o $@
+
 test.out: test.c libbesic.so
 	$(CC) $(CFLAGS) -pie $^ -o $@
 
 
 libbesic.so: besic.o
-	$(CC) $(CFLAGS) -shared -Wl,-soname,$@.$(SOVERSION) $^ -lcurl -o $@
+	$(CC) $(CFLAGS) -shared -Wl,-soname,$@.$(SOVERSION) -fPIE $^ -lcurl -o $@
 	ln -fs $@ $@.$(SOVERSION)
 
 libbesic.a: besic.o
