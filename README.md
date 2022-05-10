@@ -7,6 +7,10 @@ To install from source
 
 	sudo make install
 
+To test install install into a temporary directory
+
+	make DESTDIR=tmp prefix=/usr install
+
 
 ## Build Packages
 Install build dependencies

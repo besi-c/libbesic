@@ -3,9 +3,11 @@
 *.so
 *.so.*
 *.a
+*.py.c
 *.substvars
 *.debhelper
+tmp
 debhelper-build-stamp
 files
 debian/libbesic*/*
-debian/tmp
+debian/python3-besic/*

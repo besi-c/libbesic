@@ -1,3 +1,9 @@
+libbesic (3.0.0) UNRELEASED; urgency=medium
+
+  * Add python wrapper library and package.
+
+ -- Penn Bauman <pcb8gb@virginia.edu>  Thu, 12 May 2022 17:53:26 -0500
+
 libbesic (2.1.0) UNRELEASED; urgency=medium
 
   * Added log directory, S3 bucket, and secret retrieval functions.

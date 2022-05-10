@@ -27,3 +27,9 @@ Depends: libbesic2 (>= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: BESI-C library binary tools
  Getter for BESI-C configuration values
  BESI-C heartbeat API call command
+
+Package: python3-besic
+Architecture: any
+Depends: libbesic2 (>= ${binary:Version}), ${python3:Depends}, ${shlibs:Depends},${misc:Depends}
+Description: BESI-C python wrapper for libbesic
+ Python library to coordinate BESI-C settings retrieval
