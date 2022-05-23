@@ -1,3 +1,9 @@
+libbesic (3.0.1) UNRELEASED; urgency=medium
+
+  * Fixed file reading buffer size.
+
+ -- Penn Bauman <pcb8gb@virginia.edu>  Mon, 23 May 2022 19:07:06 -0500
+
 libbesic (3.0.0) UNRELEASED; urgency=medium
 
   * Add python wrapper library and package.

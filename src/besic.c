@@ -299,7 +299,7 @@ char* get_file_var(const char* filepath, const char *name, const char *fallback)
 	char c = 0;
 	int i = -1;
 	while (1) {
-		// Check for start of line
+		// Iterate checking for newlines
 		i++;
 		if (c == '\n')
 			i = 0;
@@ -343,10 +343,11 @@ char* get_file_var(const char* filepath, const char *name, const char *fallback)
 			} while (c != '"');
 			// If end quotation mark has been reach return value
 			if (c == '"') {
+				i--;
 				char *fin = malloc(i);
-				fseek(fp, -1*i, SEEK_CUR);
-				int r = fread(fin, 1, i - 1, fp);
-				if (r != i - 1)
+				fseek(fp, -1*(i+1), SEEK_CUR);
+				int r = fread(fin, 1, i, fp);
+				if (r != i)
 					return (char*)fallback;
 				fin[i] = 0;
 				fclose(fp);
