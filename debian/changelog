@@ -1,3 +1,9 @@
+libbesic (3.0.2) UNRELEASED; urgency=medium
+
+  * Actually fixed file reading buffer size :T
+
+ -- Penn Bauman <pcb8gb@virginia.edu>  Mon, 23 May 2022 22:35:39 -0500
+
 libbesic (3.0.1) UNRELEASED; urgency=medium
 
   * Fixed file reading buffer size.

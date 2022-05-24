@@ -31,7 +31,7 @@ char* get_file_var(const char* filepath, const char *name, const char *fallback)
 int besic_heartbeat() {
 	char *type = lower_str(besic_device_type());
 	if ((strcmp(type, "relay")) && (strcmp(type, "basestation"))) {
-		perror("Invalid Device Type for Heartbeat\n");
+		fprintf(stderr, "Invalid Device Type for Heartbeat\n");
 		return -1;
 	}
 	return api_call(besic_device_mac(), type, 0);
@@ -40,7 +40,7 @@ int besic_heartbeat() {
 int besic_data_heartbeat(besic_data *data) {
 	char *type = lower_str(besic_device_type());
 	if (strcmp(type, "relay")) {
-		perror("Invalid Device Type for Data Heartbeat\n");
+		fprintf(stderr, "Invalid Device Type for Data Heartbeat\n");
 		return -1;
 	}
 	return api_call(besic_device_mac(), type, data);
@@ -212,7 +212,7 @@ int api_get_id() {
 	char *type = besic_device_type();
 	if (strcmp(type, "RELAY")) {
 		//printf("%s\n", type);
-		perror("Only RELAY devices have a beacon ID\n");
+		fprintf(stderr, "Only RELAY devices have a beacon ID\n");
 		return -1;
 	}
 
@@ -343,9 +343,9 @@ char* get_file_var(const char* filepath, const char *name, const char *fallback)
 			} while (c != '"');
 			// If end quotation mark has been reach return value
 			if (c == '"') {
-				i--;
 				char *fin = malloc(i);
-				fseek(fp, -1*(i+1), SEEK_CUR);
+				fseek(fp, -1*(i), SEEK_CUR);
+				i--;
 				int r = fread(fin, 1, i, fp);
 				if (r != i)
 					return (char*)fallback;
