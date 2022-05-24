@@ -86,10 +86,10 @@ def custom_heartbeat(mac: str = None, path: str = None, data: Data = None) -> in
 
 
 def device_mac() -> str:
-    return str(besic_device_mac())
+    return besic_device_mac().decode()
 
 def device_type() -> str:
-    return str(besic_device_type())
+    return besic_device_type().decode()
 
 def device_id() -> int:
     return besic_device_id()
