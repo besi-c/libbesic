@@ -96,10 +96,10 @@ def device_id() -> int:
 
 def secret(name: str) -> str:
     s = besic_secret(str.encode(name))
-    if s:
+    if s == NULL:
         return ""
     else:
-        return str(s)
+        return s.decode()
 
 
 def api_url() -> str:
