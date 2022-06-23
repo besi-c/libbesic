@@ -3,7 +3,7 @@ Maintainer: Penn Bauman <pcb8gb@virginia.edu>
 Section: misc
 Priority: optional
 Standards-Version: 4.5.0
-Build-Depends: gcc (>= 10), debhelper (>= 9)
+Build-Depends: cython3, libcurl4-openssl-dev, gcc (>= 10), debhelper (>= 9)
 
 Package: libbesic2
 Architecture: any
@@ -30,6 +30,6 @@ Description: BESI-C library binary tools
 
 Package: python3-besic
 Architecture: any
-Depends: libbesic2 (>= ${binary:Version}), ${python3:Depends}, ${shlibs:Depends},${misc:Depends}
+Depends: libbesic2 (>= ${binary:Version}), ${python3:Depends}, ${shlibs:Depends}, ${misc:Depends}
 Description: BESI-C python wrapper for libbesic
  Python library to coordinate BESI-C settings retrieval

@@ -2,9 +2,7 @@ CC = gcc
 CFLAGS = -g -Wall -std=c17 -O3 -fPIC
 SOVERSION = 2
 
-python_version := $(wordlist 2,4,$(subst ., ,$(shell python --version)))
-PY_MAJOR := $(word 1,${python_version})
-PY_MINOR := $(word 2,${python_version})
+PY_MINOR := $(word 2,$(wordlist 2,4,$(subst ., ,$(shell python3 --version))))
 
 prefix = /usr/local
 bindir = $(prefix)/bin
@@ -35,7 +33,7 @@ src/besic.py.c: src/besic.pyx
 	python3 -m cython -3 $^ -o $@
 
 src/besic.py.o: src/besic.py.c
-	$(CC) $(CFLAGS) -I /usr/include/python$(PY_MAJOR).$(PY_MINOR) -c $< -o $@
+	$(CC) $(CFLAGS) -I /usr/include/python3.$(PY_MINOR) -c $< -o $@
 
 
 # Libraries
@@ -81,8 +79,8 @@ install: all
 	install -m 0755 secret.out $(DESTDIR)$(bindir)/besic-secret
 	install -m 0755 -d $(DESTDIR)$(etcdir)
 	LD_LIBRARY_PATH="$$LD_LIBRARY_PATH:." ./confgen.out > $(DESTDIR)$(etcdir)/besic.conf
-	install -m 0755 -d $(DESTDIR)$(libdir)/python$(PY_MAJOR).$(PY_MINOR)
-	install -m 0644 besic.cpython.so $(DESTDIR)$(libdir)/python$(PY_MAJOR).$(PY_MINOR)/besic.cpython-$(PY_MAJOR)$(PY_MINOR)-$$(gcc -dumpmachine).so
+	install -m 0755 -d $(DESTDIR)$(libdir)/python3.$(PY_MINOR)
+	install -m 0644 besic.cpython.so $(DESTDIR)$(libdir)/python3.$(PY_MINOR)/besic.cpython-3$(PY_MINOR)-$$(gcc -dumpmachine).so
 
 remove:
 	rm -f $(DESTDIR)$(includedir)/besic.h
@@ -90,4 +88,4 @@ remove:
 	rm -f $(DESTDIR)$(bindir)/besic-getval
 	rm -f $(DESTDIR)$(bindir)/besic-heartbeat
 	rm -f $(DESTDIR)$(bindir)/besic-secret
-	rm -f $(DESTDIR)$(libdir)/python$(PY_MAJOR).$(PY_MINOR)/besic.*.so
+	rm -f $(DESTDIR)$(libdir)/python3.$(PY_MINOR)/besic.*.so

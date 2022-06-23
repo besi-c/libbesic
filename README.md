@@ -1,5 +1,5 @@
 # libbesic
-Shared library to coordinate BESI-C device configuration
+Shared library to preform API calls and coordinate BESI-C device configuration
 
 
 ## Install
@@ -15,7 +15,7 @@ To test install install into a temporary directory
 ## Build Packages
 Install build dependencies
 
-	sudo apt-get -y install devscripts debhelper gcc
+	sudo apt-get -y install devscripts debhelper gcc libcurl4-openssl-dev cython3
 
 Then build packages
 
